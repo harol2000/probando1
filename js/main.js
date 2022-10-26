@@ -1,8 +1,7 @@
-
 	
 	//Declaración de variables
     var cadena, cod, respuesta;
-	
+	var textarea = document.getElementById('areaChat');
 	//Declaración de expresiones
     var tener = RegExp("(TIENE|TIENES|TENGO|TENÉS|TENES)");
     var edad = /AÑOS/;
@@ -16,8 +15,18 @@
 	var seis = RegExp("(6)");
 	var siete = RegExp("(7)");
 	
+	var txtPregunta1 = document.querySelector("#txtPregunta");
+	var btnsend1 = document.querySelector("#btnsend");
+	var send = document.querySelector("#btnsend");
+	send.addEventListener("click", () => evaluarExpresion());
+	txtPregunta1.addEventListener("keyup", (event) => {
+		if (event.keyCode === 13) {
+			evaluarExpresion();
+		}
+	  });
 
     function evaluarExpresion() {
+
       cadena = document.getElementById("txtPregunta").value;
 	  escribirChat(cadena);
       cadena = cadena.toUpperCase();
@@ -71,19 +80,19 @@
       switch (cod) {
 	  case 1:
 			if (r == 1) {
-			mensaje = "Hola! Escribe help";
+			mensaje = "Toxi:Hola! Escribe help";
 			};
 			if (r == 2) {
-			mensaje = "Cómo te puedo ayudar? ";
+			mensaje = "Toxi:Cómo te puedo ayudar? Escribe ayuda ";
 			};
 			if (r == 3) {
-			mensaje = "Hola, soy Toxibot, en que te puedo ayudar??";
+			mensaje = "Toxi:Hola, soy Toxibot, en que te puedo ayudar? Escribe help";
 			};
 			
         break;
 		
 		case 2:
-			mensaje = "Con cual de las siguientes opciones te puedo  ayudar? \n\r 1) ¿por qué mi parlante no da sonido? \n 2) ¿cómo puedo saber los componentes de mi computadora?\n3) ¿Cómo saber cuanta capacidad de memoria ram tengo?\n4) ¿Cómo actualizar mi windows?\n5) ¿Por qué mi computadora se caliente mucho?\n6)¿Cómo puedo comunicarme con el soporte técnico en whatsapp?\n7) ¿Cómo borrar los archivos temporales de mi computadora?  ";
+			mensaje = "Toxi:Con cual de las siguientes opciones te puedo  ayudar? \n\r 1) ¿por qué mi parlante no da sonido? \n 2) ¿cómo puedo saber los componentes de mi computadora?\n3) ¿Cómo saber cuanta capacidad de memoria ram tengo?\n4) ¿Cómo actualizar mi windows?\n5) ¿Por qué mi computadora se caliente mucho?\n6)¿Cómo puedo comunicarme con el soporte técnico en whatsapp?\n7) ¿Cómo borrar los archivos temporales de mi computadora?  ";
 	   
 
         break;
@@ -135,7 +144,7 @@
 
         break;
         default:
-		mensaje = "No entiendo lo que me estás diciendo";
+		mensaje = "Toxi:No entiendo lo que me estás diciendo, por favor escribe 'ayuda'";
 
       }
       //document.getElementById("respuesta").innerHTML = mensaje;
@@ -143,9 +152,12 @@
     }
 	
 	function escribirChat (texto) {
-		document.getElementById("areaChat").value += texto + "\r";
+		document.getElementById("areaChat").value  += texto + "\r";
+		textarea.scrollTop = textarea.scrollHeight;
 	}
 
+	//boton limpiar
 	function eraseText() {
 		document.getElementById("areaChat").value = "";
 	}
+	 
